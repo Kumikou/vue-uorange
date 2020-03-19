@@ -44,7 +44,7 @@
           <router-link to="/menu6" style="text-decoration: none;">
             <el-menu-item index="6">
               <i class="el-icon-user-solid"></i>
-              <span slot="title">修改信息</span>
+              <span slot="title">我的已售</span>
             </el-menu-item>
           </router-link>
         </el-menu>

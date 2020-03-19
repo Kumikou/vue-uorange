@@ -27,7 +27,7 @@ service.interceptors.response.use(
 
     if (res.code !== 200) {
       Message({
-        message: res || 'Error',
+        message: res.message || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
@@ -61,6 +61,9 @@ service.interceptors.response.use(
           location.reload()
         })
       })
+    }
+    if (error.response.data.code === -1) {
+      console.log('测试')
     }
     Message({
       message: error.message,

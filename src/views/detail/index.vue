@@ -41,7 +41,7 @@
             <p>1</p>
             <el-row style="margin: auto;">
               <el-button icon="el-icon-shopping-bag-1" style="width: 200px;height: 50px;background-color: #FF0000;color: white;">立即购买</el-button>
-              <el-button icon="el-icon-star-off" style="width: 200px;height: 50px;background-color:  #FF9040;color: white;" @click="handleCollect(item.id)">收藏</el-button>
+              <el-button icon="el-icon-star-off" style="width: 200px;height: 50px;background-color:  #FF9040;color: white;" @click="handleCollect(item.id)" :disabled="idCollected">{{ '收藏' }}</el-button>
             </el-row>
           </div>
         </div>
@@ -64,13 +64,23 @@ export default {
     return {
       activeIndex: '',
       goodsId: '',
-      item: ''
+      item: '',
+      idCollected: false
+      // isCollectedText: this.msg[0],
+      // msg: ['收藏', '已收藏']
     }
   },
   methods: {
     handleCollect (goodsId) {
       collectGoods(goodsId).then(res => {
         console.log(res)
+        this.$message({
+          showClose: true,
+          message: '收藏成功',
+          type: 'success'
+        })
+        // this.idCollected = true
+        // this.isCollectedText = this.msg[1]
       })
     }
   },
