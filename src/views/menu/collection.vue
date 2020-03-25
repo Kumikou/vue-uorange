@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Publish :datas="goods"></Publish>
+  <div v-loading="loading">
+    <Collection :datas="goods"></Collection>
     <div style="text-align: center;margin: 10px;">
       <el-pagination
         background
@@ -17,15 +17,15 @@
 </template>
 
 <script>
-import { getGoodsByStatus } from '@/api/personal'
-import Publish from '../../components/Person/Publish'
+import { getCollectedGoods } from '@/api/personal'
+import Collection from '../../components/Person/Collection'
 
 export default {
   data () {
     return {
       goods: '',
+      loading: true,
       params: {
-        status: 0,
         page: 1,
         size: 3
       },
@@ -38,17 +38,18 @@ export default {
   },
   methods: {
     handlePageChange (id) {
-      console.log(id)
       this.freshList(id)
     },
     freshList (currentPage) {
       this.params.page = currentPage
-      getGoodsByStatus(this.params).then(res => {
+      this.loading = true
+      getCollectedGoods(this.params).then(res => {
         console.log(res)
         this.goods = res.data.records
         this.pagination.current = res.data.current
         this.pagination.size = res.data.size
         this.pagination.pages = res.data.pages
+        this.loading = false
       })
     }
   },
@@ -56,7 +57,7 @@ export default {
     this.freshList(this.params.page)
   },
   components: {
-    Publish
+    Collection
   }
 }
 </script>

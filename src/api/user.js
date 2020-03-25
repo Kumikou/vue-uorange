@@ -23,3 +23,10 @@ export function logout () {
     // data
   })
 }
+
+export function getUsernameById (data) {
+  return request({
+    url: '/info/users/name/id/' + data,
+    method: 'get'
+  })
+}

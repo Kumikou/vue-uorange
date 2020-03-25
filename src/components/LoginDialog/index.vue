@@ -48,6 +48,11 @@ export default {
           this.$store.dispatch('user/login', this.form).then(result => {
             this.isShowChange()
             console.log(result)
+            this.$message({
+              showClose: true,
+              message: '登录成功',
+              type: 'success'
+            })
             window.location.reload()
           }).catch(() => {
             this.loading = false

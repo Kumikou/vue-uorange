@@ -90,7 +90,7 @@ export default {
       })
     },
     handlePersonal () {
-      this.$router.push('/personal')
+      this.$router.push('/info')
     }
   },
   mounted () {

@@ -20,12 +20,11 @@
       </el-menu>
     </div>
 
-    <div class="goods-detail">
+    <div class="goods-detail" v-loading="loading">
       <div class="demo-image__preview">
         <el-image
           style="width: 400px; height: 400px;position: absolute;"
-          :src="item.pic"
-          :preview-src-list="item.pic">
+          :src="item.pic">
         </el-image>
         <div class="detail">
           <p style="font-size: larger;">{{ item.title }}</p>
@@ -40,7 +39,7 @@
             <p>{{ item.isFreeFare}}</p>
             <p>1</p>
             <el-row style="margin: auto;">
-              <el-button icon="el-icon-shopping-bag-1" style="width: 200px;height: 50px;background-color: #FF0000;color: white;">立即购买</el-button>
+              <el-button icon="el-icon-shopping-bag-1" style="width: 200px;height: 50px;background-color: #FF0000;color: white;" @click="handleBuy(item.id)">立即购买</el-button>
               <el-button icon="el-icon-star-off" style="width: 200px;height: 50px;background-color:  #FF9040;color: white;" @click="handleCollect(item.id)" :disabled="idCollected">{{ '收藏' }}</el-button>
             </el-row>
           </div>
@@ -49,8 +48,8 @@
     </div>
 
     <div class="goods-bottom">
-      <p>卖家： {{ item.userId }}</p>
-      <p>上架时间： {{ item.createTime}}</p>
+      <p>卖家： {{ username }} </p>
+      <p>上架时间： {{ item.createTime | timestampToTime}}</p>
     </div>
   </div>
 </template>
@@ -58,6 +57,7 @@
 <script>
 import Header from '../../components/Header/'
 import { getDetailByGoodsId, collectGoods } from '@/api/detail'
+import { getUsernameById } from '@/api/user'
 
 export default {
   data () {
@@ -65,12 +65,17 @@ export default {
       activeIndex: '',
       goodsId: '',
       item: '',
-      idCollected: false
+      username: '',
+      idCollected: false,
+      loading: true
       // isCollectedText: this.msg[0],
       // msg: ['收藏', '已收藏']
     }
   },
   methods: {
+    handleBuy (goodsId) {
+      this.$router.push('/order/' + goodsId)
+    },
     handleCollect (goodsId) {
       collectGoods(goodsId).then(res => {
         console.log(res)
@@ -84,12 +89,29 @@ export default {
       })
     }
   },
+  filters: {
+    timestampToTime: function (timestamp) {
+      var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + '-'
+      var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+      var D = date.getDate() + ' '
+      var h = date.getHours() + ':'
+      var m = date.getMinutes() + ':'
+      var s = date.getSeconds()
+      return Y + M + D + h + m + s
+    }
+  },
   created () {
     this.goodsId = this.$route.query.goodsId
     console.log('获得当前商品id' + this.goodsId)
     getDetailByGoodsId(this.goodsId).then(res => {
       console.log(res)
       this.item = res.data
+      this.loading = false
+      getUsernameById(this.item.userId).then(res => {
+        console.log(res)
+        this.username = res.data
+      })
     })
   },
   components: {

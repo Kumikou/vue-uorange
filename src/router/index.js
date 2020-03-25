@@ -5,6 +5,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     // {
     //   path: '/',
@@ -22,6 +23,21 @@ export default new Router({
       component: () => import('@/views/detail/index')
     },
     {
+      path: '/order/:goodsId',
+      name: 'Order',
+      component: () => import('@/views/order/index')
+    },
+    {
+      path: '/alipay',
+      name: 'Alipay',
+      component: () => import('@/views/alipay/index')
+    },
+    {
+      path: '/alipay/result',
+      name: 'Alipay',
+      component: () => import('@/views/aliresult/index')
+    },
+    {
       path: '/personal',
       name: 'Personal',
       component: () => import('@/views/personal/index'),
@@ -30,40 +46,39 @@ export default new Router({
       },
       children: [
         {
-          path: '/menu1',
-          name: 'Menu1',
-          component: () => import('@/views/menu/1'),
-          meta: { title: 'Menu1' }
+          path: '/info',
+          component: () => import('@/views/menu/info'),
+          meta: { title: 'info' }
         },
         {
-          path: '/menu2',
-          name: 'Menu2',
-          component: () => import('@/views/menu/2'),
-          meta: { title: 'Menu2' }
+          path: '/followed',
+          component: () => import('@/views/menu/followed'),
+          meta: { title: 'followed' }
         },
         {
-          path: '/menu3',
-          name: 'Menu3',
-          component: () => import('@/views/menu/3'),
-          meta: { title: 'Menu3' }
+          path: '/publish',
+          component: () => import('@/views/menu/publish'),
+          meta: { title: 'publish' }
         },
         {
-          path: '/menu4',
-          name: 'Menu4',
-          component: () => import('@/views/menu/4'),
-          meta: { title: 'Menu4' }
+          path: '/bought',
+          component: () => import('@/views/menu/bought'),
+          meta: { title: 'bought' }
         },
         {
-          path: '/menu5',
-          name: 'Menu5',
-          component: () => import('@/views/menu/5'),
-          meta: { title: 'Menu5' }
+          path: '/collection',
+          component: () => import('@/views/menu/collection'),
+          meta: { title: 'collection' }
         },
         {
-          path: '/menu6',
-          name: 'Menu6',
-          component: () => import('@/views/menu/6'),
-          meta: { title: 'Menu' }
+          path: '/sold',
+          component: () => import('@/views/menu/sold'),
+          meta: { title: 'sold' }
+        },
+        {
+          path: '/address',
+          component: () => import('@/views/menu/address'),
+          meta: { title: 'address' }
         }
       ]
     }

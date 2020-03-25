@@ -10,41 +10,47 @@
 
       <div class="personal-menu" style="width: 200px;float: left;">
         <el-menu
-          default-active="1">
-          <router-link to="/menu1" style="text-decoration: none;">
-            <el-menu-item index="1">
+          :default-active="$route.path">
+          <router-link to="/info" style="text-decoration: none;">
+            <el-menu-item index="/info">
               <i class="el-icon-platform-eleme"></i>
               <span slot="title">个人信息</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/menu2" style="text-decoration: none;">
-            <el-menu-item index="2">
+          <router-link to="/followed" style="text-decoration: none;">
+            <el-menu-item index="/followed">
               <i class="el-icon-s-flag"></i>
               <span slot="title">我的关注</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/menu3" style="text-decoration: none;">
-            <el-menu-item route index="3">
+          <router-link to="/publish" style="text-decoration: none;">
+            <el-menu-item route index="/publish">
               <i class="el-icon-s-shop"></i>
               <span slot="title">我的发布</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/menu4" style="text-decoration: none;">
-            <el-menu-item index="4">
+          <router-link to="/bought" style="text-decoration: none;">
+            <el-menu-item index="/bought">
               <i class="el-icon-s-goods"></i>
               <span slot="title">我的购买</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/menu5" style="text-decoration: none;">
-            <el-menu-item index="5">
+          <router-link to="/collection" style="text-decoration: none;">
+            <el-menu-item index="/collection">
               <i class="el-icon-star-on"></i>
               <span slot="title">我的收藏</span>
             </el-menu-item>
           </router-link>
-          <router-link to="/menu6" style="text-decoration: none;">
-            <el-menu-item index="6">
+          <router-link to="/sold" style="text-decoration: none;">
+            <el-menu-item index="/sold">
               <i class="el-icon-user-solid"></i>
               <span slot="title">我的已售</span>
+            </el-menu-item>
+          </router-link>
+          <router-link to="/address" style="text-decoration: none;">
+            <el-menu-item index="/address">
+              <i class="el-icon-s-home"></i>
+              <span slot="title">地址管理</span>
             </el-menu-item>
           </router-link>
         </el-menu>
@@ -68,6 +74,9 @@ export default {
   },
   components: {
     Header
+  },
+  mounted () {
+    console.log(this.$route.path)
   },
   methods: {
     goBack () {

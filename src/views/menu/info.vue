@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="loading">
     <el-row>
       <el-col :span="20">
         <el-form ref="form" :model="userInfoForm" label-width="80px" style="margin-left: 30%;">
@@ -36,6 +36,7 @@ import { changeUserInfo } from '@/api/personal'
 export default {
   data () {
     return {
+      loading: true,
       userInfo: {
         username: '',
         sex: '',
@@ -61,6 +62,7 @@ export default {
       this.userInfo = res.data
       this.userInfoForm.username = this.userInfo.username
       this.userInfoForm.sex = this.userInfo.sex
+      this.loading = false
     })
   }
 }

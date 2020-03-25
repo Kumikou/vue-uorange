@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="goodsLoading">
     <el-row >
       <el-col :span="5" v-for="item in list" :key=item.id style="margin: 5px;width: 19.12%">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
@@ -48,6 +48,7 @@ export default {
   data () {
     return {
       activeName: 'first',
+      goodsLoading: true,
       params: {
         categoryId: this.datas,
         page: 1,
@@ -76,6 +77,7 @@ export default {
     },
     freshList (currentPage) {
       this.params.page = currentPage
+      this.goodsLoading = true
       getList(this.params).then(res => {
         console.log('分类ID:' + this.params.categoryId + '当前页:' + this.params.page + '数据:')
         console.log(res.data)
@@ -83,6 +85,7 @@ export default {
         this.pagination.current = res.data.current
         this.pagination.pages = res.data.pages
         this.pagination.size = res.data.size
+        this.goodsLoading = false
       })
     },
     detail (id) {

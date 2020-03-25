@@ -36,3 +36,32 @@ export function cancleCollectedGoods (data) {
     method: 'delete'
   })
 }
+
+export function createAddress (data) {
+  return request({
+    url: '/info/users/address',
+    method: 'post',
+    data
+  })
+}
+
+export function getAddressList () {
+  return request({
+    url: '/info/users/address/list',
+    method: 'get'
+  })
+}
+
+export function getAddressChList () {
+  return request({
+    url: '/info/users/address/list/ch',
+    method: 'get'
+  })
+}
+
+export function delAddress (data) {
+  return request({
+    url: '/info/users/address/' + data,
+    method: 'delete'
+  })
+}

@@ -23,30 +23,35 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    const res = response.data
-
-    if (res.code !== 200) {
-      Message({
-        message: res.message || 'Error',
-        type: 'error',
-        duration: 5 * 1000
-      })
-
-      if (res.status === 401) {
-        MessageBox.confirm('登录已失效,是否重新登录', '提示', {
-          confirmButtonText: '登录',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            // location.reload()
-            this.$router.push('/')
+    if (response.status === 200) {
+      const res = response.data
+      if (res.code) {
+        if (res.code !== 200) {
+          Message({
+            message: res.message || 'Error',
+            type: 'error',
+            duration: 5 * 1000
           })
-        })
+          if (res.code === 401) {
+            MessageBox.confirm('登录已失效,是否重新登录', '提示', {
+              confirmButtonText: '登录',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              store.dispatch('user/resetToken').then(() => {
+                location.reload()
+                // this.$router.push('/')
+              })
+            })
+          }
+          console.log(res)
+          return Promise.reject(new Error(res.message || 'Error'))
+        } else {
+          return res
+        }
+      } else {
+        return res
       }
-      return Promise.reject(new Error(res.msg || 'Error'))
-    } else {
-      return res
     }
   },
   error => {
@@ -59,6 +64,7 @@ service.interceptors.response.use(
       }).then(() => {
         store.dispatch('user/resetToken').then(() => {
           location.reload()
+          // this.$router.push('/')
         })
       })
     }
