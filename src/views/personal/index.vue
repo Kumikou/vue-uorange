@@ -17,6 +17,12 @@
               <span slot="title">个人信息</span>
             </el-menu-item>
           </router-link>
+          <router-link to="/doPublish" style="text-decoration: none;">
+            <el-menu-item route index="/doPublish">
+              <i class="el-icon-s-shop"></i>
+              <span slot="title">发布商品</span>
+            </el-menu-item>
+          </router-link>
           <router-link to="/followed" style="text-decoration: none;">
             <el-menu-item index="/followed">
               <i class="el-icon-s-flag"></i>

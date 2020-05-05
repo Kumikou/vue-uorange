@@ -31,6 +31,27 @@
     </div>
   </div>
 
+  <div class="middle-container">
+    <el-row :gutter="5">
+      <el-col span="16">
+          <el-input placeholder="请输入关键字" :clearable="true" style="margin-top: 10px;" v-model="search.keyword" class="input-with-select">
+            <el-select v-model="select" slot="prepend" placeholder="请选择">
+              <el-option label="二手" value="1"></el-option>
+              <el-option label="拍卖品" value="2"></el-option>
+              <el-option label="用户" value="3"></el-option>
+            </el-select>
+            <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
+          </el-input>
+      </el-col>
+      <el-col span="4">
+        <el-button style="width: 100%;height: 40px;margin-top: 10px;" type="primary" @click="handleDoPublish">发布闲置</el-button>
+      </el-col>
+      <el-col span="4">
+        <el-button style="width: 100%;height: 40px;margin-top: 10px;" type="success">拍卖场</el-button>
+      </el-col>
+    </el-row>
+  </div>
+
   <div class="list-container">
     <el-tabs v-model="activeName"  @tab-click="handleClick" :stretch="true">
         <el-tab-pane label="推荐" name="first">
@@ -63,6 +84,12 @@ export default {
   data () {
     return {
       activeName: 'first',
+      search: {
+        keyword: '',
+        page: 1,
+        size: 10
+      },
+      select: '1',
       isLogin: false,
       loading: false,
       dialogLoginVisible: false,
@@ -91,6 +118,12 @@ export default {
     },
     handlePersonal () {
       this.$router.push('/info')
+    },
+    handleDoPublish () {
+      this.$router.push('/doPublish')
+    },
+    handleSearch () {
+      this.$router.push({path: '/search', query: {keyword: this.search.keyword}})
     }
   },
   mounted () {
@@ -133,8 +166,16 @@ export default {
     left: 50%;
   }
 
-  .list-container {
-  margin: auto;
-  width: 1144px;
+  .list-container, .middle-container {
+    margin: 2px auto;
+    width: 1144px;
+  }
+
+  .el-select {
+    width: 90px;
+  }
+
+  .input-with-select .el-input-group__prepend{
+    background-color: #fff;
   }
 </style>

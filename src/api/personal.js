@@ -8,6 +8,14 @@ export function changeUserInfo (data) {
   })
 }
 
+export function doPublish (data) {
+  return request({
+    url: '/goods',
+    method: 'post',
+    data
+  })
+}
+
 export function getGoodsByStatus (data) {
   return request({
     url: '/goods/status/' + data.status + '/' + data.page + '/' + data.size,

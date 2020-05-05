@@ -18,9 +18,12 @@ export default {
   name: 'Header',
   data () {
     return {
-      keyword: '',
+      keyword: this.datas,
       select: '1'
     }
+  },
+  props: {
+    datas: ''
   }
 }
 </script>

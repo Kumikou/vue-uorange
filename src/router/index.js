@@ -23,6 +23,11 @@ export default new Router({
       component: () => import('@/views/detail/index')
     },
     {
+      path: '/search',
+      name: 'Search',
+      component: () => import('@/views/search/index')
+    },
+    {
       path: '/order/:goodsId',
       name: 'Order',
       component: () => import('@/views/order/index')
@@ -49,6 +54,11 @@ export default new Router({
           path: '/info',
           component: () => import('@/views/menu/info'),
           meta: { title: 'info' }
+        },
+        {
+          path: '/doPublish',
+          component: () => import('@/views/menu/doPublish'),
+          meta: { title: 'doPublish' }
         },
         {
           path: '/followed',

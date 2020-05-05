@@ -21,6 +21,7 @@
               </el-radio>
           </el-radio-group>
         </el-col>
+
         <el-col :span="24">
           <p style="font-weight: bold;margin: 40px 0px 10px;">确认订单信息</p>
           <el-divider content-position="right"><el-link :underline="false" @click="handleUserDetail"><i class="el-icon-user-solid"></i>{{ ' 卖家: ' + sellerName }}</el-link></el-divider>
@@ -44,6 +45,7 @@
           </el-table>
         </el-col>
       </el-row>
+
       <el-row>
         <el-col :span="24">
           <el-button style="width: 150px;height: 50px;float: right;font-weight: bolder;margin-top: 20px;"
