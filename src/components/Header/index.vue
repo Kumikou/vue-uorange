@@ -7,7 +7,7 @@
           <el-option label="拍卖品" value="2"></el-option>
           <el-option label="用户" value="3"></el-option>
         </el-select>
-        <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-button slot="append" @click="handleSearch" icon="el-icon-search"></el-button>
       </el-input>
     </div>
   </div>
@@ -24,11 +24,21 @@ export default {
   },
   props: {
     datas: ''
+  },
+  methods: {
+    handleSearch () {
+      this.$router.push({path: '/search', query: {keyword: this.keyword}})
+      location.reload()
+    }
   }
 }
 </script>
 
 <style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
   .common-header {
   width: 100%;
   height: 150px;

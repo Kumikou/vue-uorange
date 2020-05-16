@@ -12,7 +12,8 @@
                 @click="detail(item.id)"
                 ></el-image>
           <div style="padding: 5px;text-align: left;">
-            <el-link :underline="false"><p @click="detail(item.id)" class="title">{{ item.title }}</p></el-link>
+            <p style="margin: 0;"><el-link :underline="false"><p @click="detail(item.id)" class="title">{{ item.title }}</p></el-link></p>
+            <span><el-link :underline="false"><p @click="detail(item.id)" class="description">{{ item.description }}</p></el-link></span>
             <el-divider></el-divider>
             <span class="price">￥{{ item.price }}</span>
             <div class="bottom clearfix">
@@ -113,8 +114,17 @@ export default {
   .title {
     font-size: small;
     width: 100%;
+    height: 20px;
+    margin: 0px;
+    line-height: 20px;
+    overflow: hidden;
+  }
+
+  .description {
+    font-size: small;
+    width: 100%;
     height: 40px;
-    margin: 5px;
+    margin: 0px;
     line-height: 20px;
     overflow: hidden;
   }

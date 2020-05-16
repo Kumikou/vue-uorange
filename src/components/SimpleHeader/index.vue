@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'Header',
+  name: 'SimpleHeader',
   data () {
     return {
       // keyword: '',

@@ -2,8 +2,8 @@
   <div>
     <el-card class="box-card" style="margin: 20px;" v-for="item in datas" :key="item.id">
       <div slot="header" class="clearfix">
-        <span>收藏时间:{{ item.createTime | timestampToTime }}</span>
-        <el-button style="float: right; padding: 3px 0" icon="el-icon-user-solid" type="success" @click="handleSaler(item.id)">{{ '卖家:' + item.userId}}</el-button>
+        <span>收藏时间: {{ item.createTime | timestampToTime }}</span>
+        <el-button style="float: right; padding: 3px 0" icon="el-icon-user-solid" type="success" @click="handleSaler(item.id)">卖家 {{item.userId | userFilter}}</el-button>
       </div>
       <div >
         <el-row :gutter="20">
@@ -80,6 +80,9 @@ export default {
       var m = date.getMinutes() + ':'
       var s = date.getSeconds()
       return Y + M + D + h + m + s
+    },
+    userFilter: function (userId) {
+      return 'Kumikou'
     }
   },
   props: {

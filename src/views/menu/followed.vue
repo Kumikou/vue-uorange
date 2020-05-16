@@ -1,6 +1,6 @@
 <template>
   <div>
-    这是第二个菜单
+    已关注
   </div>
 </template>
 

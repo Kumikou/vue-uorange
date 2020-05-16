@@ -38,9 +38,9 @@
             <p style="font-size: xx-large;color: red;margin: 16px 0px;">{{ item.price }}</p>
             <p>{{ item.isFreeFare}}</p>
             <p>1</p>
-            <el-row style="margin: auto;">
+            <el-row style="margin: 40px auto;">
               <el-button icon="el-icon-shopping-bag-1" style="width: 200px;height: 50px;background-color: #FF0000;color: white;" @click="handleBuy(item.id)">立即购买</el-button>
-              <el-button icon="el-icon-star-off" style="width: 200px;height: 50px;background-color:  #FF9040;color: white;" @click="handleCollect(item.id)" :disabled="idCollected">{{ '收藏' }}</el-button>
+              <el-button icon="el-icon-star-off" style="width: 200px;height: 50px;background-color:  #FF9040;color: white;" @click="handleCollect(item.id)" :disabled="idCollected">{{ isCollectedText }}</el-button>
             </el-row>
           </div>
         </div>
@@ -50,6 +50,13 @@
     <div class="goods-bottom">
       <p>卖家： {{ username }} </p>
       <p>上架时间： {{ item.createTime | timestampToTime}}</p>
+    </div>
+
+    <div style="width: 1144px;margin: 50px auto;">
+      <el-divider content-position="left">商品详情</el-divider>
+      <div>
+        <p style="height: 23%;">{{ item.description}}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -67,8 +74,8 @@ export default {
       item: '',
       username: '',
       idCollected: false,
-      loading: true
-      // isCollectedText: this.msg[0],
+      loading: true,
+      isCollectedText: '收藏'
       // msg: ['收藏', '已收藏']
     }
   },
@@ -84,8 +91,8 @@ export default {
           message: '收藏成功',
           type: 'success'
         })
-        // this.idCollected = true
-        // this.isCollectedText = this.msg[1]
+        this.idCollected = true
+        this.isCollectedText = '已收藏'
       })
     }
   },

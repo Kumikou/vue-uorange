@@ -9,11 +9,11 @@
         <div v-show="isLogin" style="margin: 10px;">
           <div style="margin: 10px;">{{ userInfo.username }}</div>
           <div>
-              <span>已发布</span>
+              <span>已发布{{ ' ' + count.inSaleCount }}</span>
               <el-divider direction="vertical"></el-divider>
-              <span>已买到</span>
+              <span>已买到 -</span>
               <el-divider direction="vertical"></el-divider>
-              <span>已卖出</span>
+              <span>已卖出{{ ' ' + count.soldCount }}</span>
           </div>
           <el-button type="text" @click="handlePersonal" >个人中心</el-button>
           <el-button type="text" @click="logout">退出</el-button>
@@ -47,7 +47,7 @@
         <el-button style="width: 100%;height: 40px;margin-top: 10px;" type="primary" @click="handleDoPublish">发布闲置</el-button>
       </el-col>
       <el-col span="4">
-        <el-button style="width: 100%;height: 40px;margin-top: 10px;" type="success">拍卖场</el-button>
+        <el-button style="width: 100%;height: 40px;margin-top: 10px;" type="success" disabled="">拍卖场</el-button>
       </el-col>
     </el-row>
   </div>
@@ -79,6 +79,7 @@ import GoodsList from '../components/GoodsList/'
 import LoginDialog from '../components/LoginDialog/'
 import { getToken } from '@/utils/auth'
 import { getInfo } from '@/api/user'
+import { getCount } from '@/api/index'
 
 export default {
   data () {
@@ -88,6 +89,10 @@ export default {
         keyword: '',
         page: 1,
         size: 10
+      },
+      count: {
+        inSaleCount: '-',
+        soldCount: '-'
       },
       select: '1',
       isLogin: false,
@@ -132,6 +137,11 @@ export default {
       getInfo().then(res => {
         this.userInfo.username = res.data.username
         this.userInfo.avatar = res.data.img
+        getCount().then(res => {
+          console.log(res)
+          this.count.inSaleCount = res.data.inSaleCount
+          this.count.soldCount = res.data.soldCount
+        })
       })
     }
   }

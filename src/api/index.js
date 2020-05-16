@@ -6,3 +6,10 @@ export function getList (params) {
     method: 'get'
   })
 }
+
+export function getCount () {
+  return request({
+    url: '/goods/count',
+    method: 'get'
+  })
+}

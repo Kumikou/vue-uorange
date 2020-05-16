@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <el-dialog title="登录" :visible.sync="isShow" :before-close="beforeClose" style="width: 900px;" @close="isShowChange" >
+    <el-dialog title="登录" :visible.sync="isShow" :before-close="beforeClose" style="width: 900px;margin: auto;" @close="isShowChange" >
       <el-form ref="form" :model="form" :rules="loginRules" auto-complete="on" label-position="left">
         <el-form-item label="用户名" :label-width="formLabelWidth" prop="username">
           <el-input v-model="form.username" autocomplete="off"></el-input>
@@ -17,7 +17,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="注册" :visible.sync="isShowRegister" style="width: 900px;" :before-close="beforeClose" @close="isShowRegisterValueChange" >
+    <el-dialog title="注册" :visible.sync="isShowRegister" style="width: 900px;margin: auto;" :before-close="beforeClose" @close="isShowRegisterValueChange" >
       <el-form ref="registerForm" :model="registerForm" :rules="registerRules" auto-complete="on" label-position="left">
         <el-form-item label="用户名" :label-width="formLabelWidth" prop="username">
           <el-input v-model="registerForm.username" autocomplete="off"></el-input>
@@ -38,6 +38,7 @@
         <el-button type="success" :loading="registerLoading" @click="handleRegister">注 册</el-button>
       </div>
     </el-dialog>
+
   </div>
 </template>
 
